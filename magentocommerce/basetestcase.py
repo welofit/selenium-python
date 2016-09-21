@@ -4,6 +4,8 @@
 import unittest
 from selenium import webdriver
 from tools.read_settings import get_settings
+import os
+
 
 BROWSER = get_settings()['browser']
 
@@ -14,17 +16,22 @@ class BaseTestCase(unittest.TestCase):
         if BROWSER == 'firefox':
             driver = webdriver.Firefox()
         elif BROWSER == 'chrome':
+            os.path.abspath(os.path.join(__file__, '../..', 'chromedriver'))
             driver = webdriver.Chrome()
         else:
             raise Exception('browser not allowed')
         return driver
 
-    def SetUp(self):
-        self.driver = self.get_browser()
-        self.driver.implicitly_wait(get_settings()['wait'])
-        self.driver.maximize_window()
-        self.driver.get(get_settings()['url'])
+    @classmethod
+    def SetUpClass(cls):
+        cls.driver = cls.get_browser()
+        cls.driver.implicitly_wait(get_settings()['wait'])
+        cls.driver.maximize_window()
+        # Open URL in the browser
+        cls.driver.get(get_settings()['url'])
 
-    def tearDown(self):
-        self.driver.quit()
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
+
 
