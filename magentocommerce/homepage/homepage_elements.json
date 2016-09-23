@@ -1,0 +1,11 @@
+{
+    "main": {
+      "container": "//*[@id='gl-wrapper']"
+    },
+    "header": {
+      "logo": "//*[@id='nav-main']/div/div[1]/a",
+      "menu": "//*[@id='tb-megamenu-menu-magento-header-primary-v2']/div/ul",
+      "demo": "//*[@id='nav-main']/div/div[2]/a[2]",
+      "footer": "//*[@id='magento-com']/div/div/div[1]/ul"
+    }
+}
